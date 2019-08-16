@@ -1,0 +1,38 @@
+{
+  "name": "hostel-management",
+  "version": "1.0.0",
+  "description": "Login Portal",
+  "main": "server.js",
+  "scripts": {
+    "client-install": "npm install --prefix client",
+    "start": "node server.js",
+    "server": "nodemon server.js",
+    "client": "npm start --prefix client",
+    "dev": "concurrently \"npm run server\" \"npm run client\""
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/starkblaze01/Hostel-Management.git"
+  },
+  "author": "Mayank Pathela",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/starkblaze01/Hostel-Management/issues"
+  },
+  "homepage": "https://github.com/starkblaze01/Hostel-Management#readme",
+  "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "body-parser": "^1.18.3",
+    "concurrently": "^4.1.0",
+    "express": "^4.16.4",
+    "gravatar": "^1.8.0",
+    "jsonwebtoken": "^8.5.1",
+    "mongoose": "^5.4.19",
+    "passport": "^0.4.0",
+    "passport-jwt": "^4.0.0",
+    "validator": "^10.11.0"
+  },
+  "devDependencies": {
+    "nodemon": "^1.18.10"
+  }
+}
