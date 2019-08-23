@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
-// import { getCurrentUser } from "../actions/authActions";
+import { getCurrentUser } from "../actions/authActions";
 
 class Dashboard extends Component {
   componentDidMount() {
@@ -34,6 +34,6 @@ const mapStateToProps = state => ({
 
 export default connect(
   mapStateToProps
-  // ,
-  // { getCurrentUser }
+  ,
+  { getCurrentUser }
 )(Dashboard);
