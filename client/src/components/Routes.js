@@ -5,8 +5,9 @@ import Footer from "./layout/Footer";
 import Home from "./layout/Home";
 import Register from "./auth/Register";
 import Login from "./auth/Login";
-import Dashboard from "./Dashboard";
+import Dashboard from "./pages/Dashboard";
 import PrivateRoute from './common/PrivateRoute';
+import Student from './pages/Student';
 
 class Routes extends Component {
     render() {
@@ -16,6 +17,7 @@ class Routes extends Component {
                 <Route exact path="/" component={Home} />
                 <div className="container">
                     <PrivateRoute exact path="/dashboard" component={Dashboard} />
+                    <PrivateRoute exact path="/student" component={Student} />
                     <Route exact path="/register" component={Register} />
                     <Route exact path="/login" component={Login} />
                 </div>
