@@ -1,11 +1,10 @@
-const router = require('express').Router;
+const router = require('express').Router();
 const passport = require('passport')
 
 // Student models
-const Student = require("../models/Student");
-const User = require("../models/User");
+const Student = require("../../models/Student")
 
-const StudentValidation = require('../validation/student')
+const StudentValidation = require('../../validation/student')
 
 
 // POST
@@ -30,7 +29,7 @@ router.post('/student', passport.authenticate('jwt', {session: false}), (req, re
 
       newStudent.save()
         .then(student => res.json(student))
-        .catch(err => res.status(500).json({error: 'Failed to save new student in the DB'})
+        .catch(err => res.status(500).json({error: 'Failed to save new student in the DB'}))
     }
   })
   
@@ -51,3 +50,5 @@ router.get('/student:batch', passport.authenticate('jwt', {session: false}), (re
 router.get('/students', (req, res) => {
   Student.find().then(students => res.json(students))
 })
+
+module.exports = router;
