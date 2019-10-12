@@ -49,8 +49,8 @@ class Dashboard extends Component {
                 <li className="list-group-item">Some Status</li>
               </ul>
               <div className="card-body">
-                <a href="/" className="card-link">Some link</a>
-                <a href="/" className="card-link">Another link</a>
+                <p className="card-link">Some link</p>
+                <p className="card-link">Another link</p>
               </div>
             </div>
           </a>

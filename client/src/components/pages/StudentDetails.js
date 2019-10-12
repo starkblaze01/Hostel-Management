@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import classnames from "classnames";
-
+import { createStudentDetails } from '../../actions/studentDetailsActions';
 
 class StudentDetails extends Component {
     constructor(props) {
@@ -32,8 +32,18 @@ class StudentDetails extends Component {
             room: this.state.room,
             gender: this.state.gender,
         }
+        console.table(studentDetailsData);
+        this.props.createStudentDetails(studentDetailsData);
+        this.setState({
+            name: '',
+            email: '',
+            id: '',
+            gender: '',
+            room: '',
+            errors: {}
+        });
     }
-    componentWillReceiveProps(nextProps) {
+    UNSAFE_componentWillReceiveProps(nextProps) {
         if (nextProps.errors) {
             this.setState({ errors: nextProps.errors });
         }
@@ -50,63 +60,75 @@ class StudentDetails extends Component {
                 <form onSubmit={this.onSubmit}>
                     <div className="row">
                         <div className="col">
-                            <label for="name">Name</label>
+                            <label htmlFor="name">Name</label>
                             <input type="text" id="name" placeholder="Name"
                                 className={classnames("form-control", {
                                     "is-invalid": errors.name
                                 })}
                                 onChange={this.onChange}
+                                name="name"
                                 value={this.state.name}
                             />
                             {errors.name && (
-                                <div className="invalid-feedback">{errors.name}</div>
+                                <div className="invalid-tooltip">{errors.name}</div>
                             )}
                         </div>
                         <div className="col">
-                            <label for="email">Email address</label>
+                            <label htmlFor="email">Email address</label>
                             <input type="email" id="email" aria-describedby="emailHelp" placeholder="Enter email"
                                 className={classnames("form-control", {
                                     "is-invalid": errors.email
                                 })}
                                 onChange={this.onChange}
+                                name="email"
                                 value={this.state.email}
                             />
                             {errors.email && (
-                                <div className="invalid-feedback">{errors.email}</div>
+                                <div className="invalid-tooltip">{errors.email}</div>
                             )}
                         </div>
                         <div className="col">
-                            <label for="id">ID</label>
+                            <label htmlFor="id">ID</label>
                             <input type="number" id="id" placeholder="ID"
                                 className={classnames("form-control", {
                                     "is-invalid": errors.id
                                 })}
                                 onChange={this.onChange}
+                                name="id"
                                 value={this.state.id}
                             />
                             {errors.id && (
-                                <div className="invalid-feedback">{errors.id}</div>
+                                <div className="invalid-tooltip">{errors.id}</div>
                             )}
                         </div>
                         <div className="col">
-                            <label for="room">Room No.</label>
+                            <label htmlFor="room">Room No.</label>
                             <input type="number" id="room" placeholder="Room No."
                                 className={classnames("form-control", {
                                     "is-invalid": errors.room
                                 })}
                                 onChange={this.onChange}
+                                name="room"
                                 value={this.state.room}
                             />
                             {errors.room && (
-                                <div className="invalid-feedback">{errors.room}</div>
+                                <div className="invalid-tooltip">{errors.room}</div>
                             )}
                         </div>
-                        <div class="col">
-                            <label for="exampleFormControlSelect1">Gender</label>
-                            <select class="form-control" id="exampleFormControlSelect1" onChange={this.onChange} value={this.state.gender}>
-                                <option>Female</option>
-                                <option>Male</option>
+                        <div className="col">
+                            <label htmlFor="exampleFormControlSelect1">Gender</label>
+                            <select className={classnames("form-control", {
+                                "is-invalid": errors.room
+                            })}
+                                id="exampleFormControlSelect1" onChange={this.onChange} value={this.state.gender}
+                                name="gender"
+                            >   <option value="" defaultValue disabled>Select Gender</option>
+                                <option >FEMALE</option>
+                                <option >MALE</option>
                             </select>
+                            {errors.gender && (
+                                <div className="invalid-tooltip">{errors.gender}</div>
+                            )}
                         </div>
                         <div className="col-auto" >
                             <button type="submit" style={{ verticalAlign: '-39px' }} className="btn btn-primary">Add</button>
@@ -119,10 +141,12 @@ class StudentDetails extends Component {
 }
 
 StudentDetails.propTypes = {
-
+    createStudentDetails: PropTypes.func.isRequired,
+    errors: PropTypes.object.isRequired,
 }
 
 const mapStateToProps = state => ({
-
+    errors: state.errors,
+    studentDetails: state.studentDetails,
 });
-export default connect(mapStateToProps)(StudentDetails);
+export default connect(mapStateToProps, { createStudentDetails })(StudentDetails);
