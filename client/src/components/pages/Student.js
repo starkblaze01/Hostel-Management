@@ -13,7 +13,7 @@ class Student extends Component {
                         <div className="card-body">
                             <h5 className="card-title">B.Tech-2016</h5>
                             <h6 className="card-subtitle mb-2 text-muted">CS & IT</h6>
-                            <a href="#"><p onClick={() => this.onBatchSelect('B.Tech-2016')} className="card-text">Click to check their info</p></a>
+                            <p onClick={() => this.onBatchSelect('B.Tech-2016')} className="card-text">Click to check their info</p>
                         </div>
                     </div>
                     <div className="card" style={{ width: "18rem" }}>
