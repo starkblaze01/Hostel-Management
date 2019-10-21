@@ -18,7 +18,7 @@ module.exports = function validateStudentInput(data) {
   }
 
   if (Validator.isEmpty(data.batch)) {
-    errors.email = "Batch is required";
+    errors.batch = "Batch is required";
   }
 
   if(!genders.includes(data.genders)) {
