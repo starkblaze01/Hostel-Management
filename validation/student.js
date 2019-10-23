@@ -4,11 +4,7 @@ const isEmpty = require("./is-empty");
 module.exports = function validateStudentInput(data) {
   const errors = {};
   const genders = ['MALE', 'FEMALE']
-
-  data.name = !isEmpty(data.name) ? data.name : "";
-  data.email = !isEmpty(data.email) ? data.email : "";
-  data.batch = !isEmpty(data.batch) ? data.batch : "";
-
+  
   if (!Validator.isEmail(data.email)) {
     errors.email = "Email is invalid";
   }
@@ -21,7 +17,7 @@ module.exports = function validateStudentInput(data) {
     errors.batch = "Batch is required";
   }
 
-  if(!genders.includes(data.genders)) {
+  if(genders.includes(data.genders)) {
     errors.gender = "Invalid gender";
   }
 

@@ -9,7 +9,7 @@ const StudentValidation = require('../../validation/student')
 
 // POST
 
-router.post('/student', passport.authenticate('jwt', {session: false}), (req, res) => {
+router.post('/', passport.authenticate('jwt', {session: false}), (req, res) => {
   const { email, id } = req.body
 
   const { errors, isValid } = StudentValidation(req.body)
@@ -29,7 +29,7 @@ router.post('/student', passport.authenticate('jwt', {session: false}), (req, re
 
       newStudent.save()
         .then(student => res.json(student))
-        .catch(err => res.status(500).json({error: 'Failed to save new student in the DB'}))
+        .catch(err => res.status(500).json({error: 'Failed to save new student in the DB', err}))
     }
   })
   
@@ -38,16 +38,16 @@ router.post('/student', passport.authenticate('jwt', {session: false}), (req, re
 
 // GET
 
-router.get('/student:batch', passport.authenticate('jwt', {session: false}), (req, res) => {
+router.get('/:batch', passport.authenticate('jwt', {session: false}), (req, res) => {
   const { batch } = req.params;
 
   Student.find({ batch })
     .then(students => res.json(students))
-    .catch(err => console.log({error: 'Failed to fetch students'}))
+    .catch(err => console.log({error: 'Failed to fetch students', err}))
 })
 
 
-router.get('/students', (req, res) => {
+router.get('/all', (req, res) => {
   Student.find().then(students => res.json(students))
 })
 
