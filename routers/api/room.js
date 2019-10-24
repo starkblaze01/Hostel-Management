@@ -16,7 +16,7 @@ router.get('/:block',  passport.authenticate('jwt', {session: false}), (req, res
 
 
 // POST
-// Get a single room defined by id
+// Create a room
 router.post('/',  passport.authenticate('jwt', {session: false}), (req, res) => {
   const { errors, isValid } = validateRoomInput(req.body)
   if(!isValid) return res.status(400).json(errors)

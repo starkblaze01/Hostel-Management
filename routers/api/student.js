@@ -6,7 +6,6 @@ const Student = require("../../models/Student")
 
 const StudentValidation = require('../../validation/student')
 
-
 // POST
 
 router.post('/', passport.authenticate('jwt', {session: false}), (req, res) => {
@@ -38,7 +37,7 @@ router.post('/', passport.authenticate('jwt', {session: false}), (req, res) => {
 
 // GET
 
-router.get('/:batch', passport.authenticate('jwt', {session: false}), (req, res) => {
+router.get('/batch/:batch', passport.authenticate('jwt', {session: false}), (req, res) => {
   const { batch } = req.params;
 
   Student.find({ batch })
@@ -48,7 +47,9 @@ router.get('/:batch', passport.authenticate('jwt', {session: false}), (req, res)
 
 
 router.get('/all', (req, res) => {
-  Student.find().then(students => res.json(students))
+  Student.find()
+    .then(students => res.json(students))
+    .catch(err => res.status(400).json({...err, message: 'Failed to fetch all students'}))
 })
 
 module.exports = router;
