@@ -16,6 +16,12 @@ const RoomSchema = new Schema({
       
     }
   ],
+  block: {
+    type: String,
+    enum: ['A', 'B', 'C', 'D'],
+    required: true,
+    trim: true
+  },
   cleaner: {
     type: String,
     trim: true,
