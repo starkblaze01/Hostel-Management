@@ -69,22 +69,24 @@ class Dashboard extends Component {
             </div>
           </div>
         </div>
-        <div style={{ display: 'flex', marginTop: '5rem' }}>
-          <div className="card" style={{ width: "18rem" }}>
-            <img src={bedRoom} className="card-img-top" alt="Cleaning" />
-            <div className="card-body">
-              <h5 className="card-title">Rooms</h5>
-              <p className="card-text">Room Allotment Status</p>
-            </div>
-            <ul className="list-group list-group-flush">
-              <li className="list-group-item">Click to see more</li>
-            </ul>
-            <div className="card-body">
-              <a href="/" className="card-link">Some link</a>
-              <a href="/" className="card-link">Another link</a>
+        <a href="/block">
+          <div style={{ display: 'flex', marginTop: '5rem' }}>
+            <div className="card" style={{ width: "18rem" }}>
+              <img src={bedRoom} className="card-img-top" alt="Cleaning" />
+              <div className="card-body">
+                <h5 className="card-title">Rooms</h5>
+                <p className="card-text">Room Allotment Status</p>
+              </div>
+              <ul className="list-group list-group-flush">
+                <li className="list-group-item">Click to see more</li>
+              </ul>
+              <div className="card-body">
+                <p href="/" className="card-link">Some link</p>
+                <p href="/" className="card-link">Another link</p>
+              </div>
             </div>
           </div>
-        </div>
+        </a>
       </div>
     );
   }

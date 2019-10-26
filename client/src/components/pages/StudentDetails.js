@@ -2,13 +2,13 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import classnames from "classnames";
-import { createStudentDetails } from '../../actions/studentDetailsActions';
+import { createStudentDetails, getStudentDetails } from '../../actions/studentDetailsActions';
 
 class StudentDetails extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            batch: 'Batch-2016',
+            batch: '2016',
             name: '',
             email: '',
             id: '',
@@ -49,13 +49,29 @@ class StudentDetails extends Component {
         }
     }
     async componentDidMount() {
-        // await;
+        await this.props.getStudentDetails();
     }
+
     render() {
+        const { studentData, loading } = this.props.studentDetails;
+        let tableContent;
+        (!studentData.length || loading) ? (
+            tableContent = null
+        ) : tableContent = studentData.length ? studentData.map(
+            el =>
+                <tr key={studentData.indexOf(el)} >
+                    <th scope="row">{studentData.indexOf(el) + 1}</th>
+                    <td>{el.name ? el.name : ""}</td>
+                    <td>{el.email ? el.email : ""}</td>
+                    <td>{el.id ? el.id : ""}</td>
+                    <td>{el.room ? el.room : ""}</td>
+                    <td>{el.gender ? el.gender : ""}</td>
+                </tr>
+        ) : null
         const { errors } = this.state;
         return (
             <div style={{ height: '100vh' }}>
-                <h1>Batch-2016</h1>
+                <h1>{this.state.batch}</h1>
                 <br />
                 <form onSubmit={this.onSubmit}>
                     <div className="row">
@@ -135,6 +151,23 @@ class StudentDetails extends Component {
                         </div>
                     </div>
                 </form>
+                <div style={{ marginTop: '50px', overflow: 'scroll', maxHeight: 800 }}>
+                    <table className="table table-striped table-hover">
+                        <thead className="thead-dark">
+                            <tr>
+                                <th scope="col">#</th>
+                                <th scope="col">Name</th>
+                                <th scope="col">Email</th>
+                                <th scope="col">ID</th>
+                                <th scope="col">Room No.</th>
+                                <th scope="col">Gender</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {tableContent}
+                        </tbody>
+                    </table>
+                </div>
             </div>
         );
     }
@@ -142,6 +175,7 @@ class StudentDetails extends Component {
 
 StudentDetails.propTypes = {
     createStudentDetails: PropTypes.func.isRequired,
+    getStudentDetails: PropTypes.func.isRequired,
     errors: PropTypes.object.isRequired,
 }
 
@@ -149,4 +183,4 @@ const mapStateToProps = state => ({
     errors: state.errors,
     studentDetails: state.studentDetails,
 });
-export default connect(mapStateToProps, { createStudentDetails })(StudentDetails);
+export default connect(mapStateToProps, { createStudentDetails, getStudentDetails })(StudentDetails);
