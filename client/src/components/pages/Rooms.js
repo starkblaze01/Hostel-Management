@@ -10,9 +10,10 @@ class Rooms extends Component {
         this.state = {
             block: 'A',
             id: '',
-            students: '',
+            students: [],
             cleaner: '',
-            gender: {}
+            gender: '',
+            errors: {},
         }
         this.onChange = this.onChange.bind(this);
         this.onSubmit = this.onSubmit.bind(this);
@@ -23,15 +24,14 @@ class Rooms extends Component {
     onSubmit(e) {
         e.preventDefault();
         const studentDetailsData = {
-            name: this.state.name,
-            email: this.state.email,
-            batch: this.state.batch,
+            students: this.state.students,
+            cleaner: this.state.cleaner,
+            block: this.state.block,
             id: this.state.id,
-            room: this.state.room,
             gender: this.state.gender,
         }
         console.table(studentDetailsData);
-        this.props.createStudentDetails(studentDetailsData);
+        // this.props.createStudentDetails(studentDetailsData);
         this.setState({
             name: '',
             email: '',
@@ -53,41 +53,13 @@ class Rooms extends Component {
         const { errors } = this.state;
         return (
             <div style={{ height: '100vh' }}>
-                <h1>{this.state.batch}</h1>
+                <h1>{this.state.block}</h1>
                 <br />
                 <form onSubmit={this.onSubmit}>
                     <div className="row">
                         <div className="col">
-                            <label htmlFor="name">Name</label>
-                            <input type="text" id="name" placeholder="Name"
-                                className={classnames("form-control", {
-                                    "is-invalid": errors.name
-                                })}
-                                onChange={this.onChange}
-                                name="name"
-                                value={this.state.name}
-                            />
-                            {errors.name && (
-                                <div className="invalid-tooltip">{errors.name}</div>
-                            )}
-                        </div>
-                        <div className="col">
-                            <label htmlFor="email">Email address</label>
-                            <input type="email" id="email" aria-describedby="emailHelp" placeholder="Enter email"
-                                className={classnames("form-control", {
-                                    "is-invalid": errors.email
-                                })}
-                                onChange={this.onChange}
-                                name="email"
-                                value={this.state.email}
-                            />
-                            {errors.email && (
-                                <div className="invalid-tooltip">{errors.email}</div>
-                            )}
-                        </div>
-                        <div className="col">
-                            <label htmlFor="id">ID</label>
-                            <input type="number" id="id" placeholder="ID"
+                            <label htmlFor="id">Room No.</label>
+                            <input type="text" id="id" placeholder="Room No."
                                 className={classnames("form-control", {
                                     "is-invalid": errors.id
                                 })}
@@ -100,21 +72,35 @@ class Rooms extends Component {
                             )}
                         </div>
                         <div className="col">
-                            <label htmlFor="room">Room No.</label>
-                            <input type="number" id="room" placeholder="Room No."
+                            <label htmlFor="students">Student ID</label>
+                            <input type="number" id="students" placeholder="Enter Student Id"
                                 className={classnames("form-control", {
-                                    "is-invalid": errors.room
+                                    "is-invalid": errors.students
                                 })}
                                 onChange={this.onChange}
-                                name="room"
-                                value={this.state.room}
+                                name="students"
+                                value={this.state.students}
                             />
-                            {errors.room && (
-                                <div className="invalid-tooltip">{errors.room}</div>
+                            {errors.students && (
+                                <div className="invalid-tooltip">{errors.students}</div>
                             )}
                         </div>
                         <div className="col">
-                            <label htmlFor="exampleFormControlSelect1">Gender</label>
+                            <label htmlFor="cleaner">Cleaner Name</label>
+                            <input type="text" id="cleaner" placeholder="Cleaner Name"
+                                className={classnames("form-control", {
+                                    "is-invalid": errors.cleaner
+                                })}
+                                onChange={this.onChange}
+                                name="cleaner"
+                                value={this.state.cleaner}
+                            />
+                            {errors.cleaner && (
+                                <div className="invalid-tooltip">{errors.cleaner}</div>
+                            )}
+                        </div>
+                        <div className="col">
+                            <label htmlFor="exampleFormControlSelect1">Boys/Girls</label>
                             <select className={classnames("form-control", {
                                 "is-invalid": errors.room
                             })}
