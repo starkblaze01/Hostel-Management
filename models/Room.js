@@ -11,8 +11,8 @@ const RoomSchema = new Schema({
   },
   students: [
     {
-      type: Schema.Types.ObjectId,
-      ref: 'users',
+      type: String,
+      unique: true,
       
     }
   ],

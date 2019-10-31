@@ -18,12 +18,8 @@ const validateCleanerInput = data => {
 const validateStudentInput = data => {
   const errors = {};
 
-  if (Validator.isEmpty(data.studentId)) {
+  if (!data.studentIds.length) {
     errors.studentId = "Student ID is missing";
-  }
-
-  if (!mongoose.Types.ObjectId.isValid(data.studentId)) {
-    errors.studentId = "Student ID is invalid";
   }
 
   return {
