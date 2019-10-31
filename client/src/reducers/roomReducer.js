@@ -1,7 +1,7 @@
 import { GET_STUDENT_DETAILS, ENABLE_STUDENT_DETAILS_LOADING, DISABLE_STUDENT_DETAILS_LOADING } from "../actions/types";
 
 const initialState = {
-    studentData: [],
+    roomData: [],
     loading: false,
 };
 
@@ -10,7 +10,7 @@ export default function (state = initialState, action) {
         case GET_STUDENT_DETAILS:
             return {
                 ...state,
-                studentData: action.payload,
+                roomData: action.payload,
             };
         case ENABLE_STUDENT_DETAILS_LOADING:
             return {

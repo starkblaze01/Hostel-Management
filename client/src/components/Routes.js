@@ -9,6 +9,9 @@ import Dashboard from "./pages/Dashboard";
 import PrivateRoute from './common/PrivateRoute';
 import Student from './pages/Student';
 import StudentDetails from './pages/StudentDetails';
+import Block from './pages/Block';
+import Rooms from "./pages/Rooms";
+
 
 class Routes extends Component {
     render() {
@@ -19,6 +22,8 @@ class Routes extends Component {
                 <div className="container">
                     <PrivateRoute exact path="/dashboard" component={Dashboard} />
                     <PrivateRoute exact path="/student" component={Student} />
+                    <PrivateRoute exact path="/block" component={Block} />
+                    <PrivateRoute exact path="/room/:id" component={Rooms} />
                     <PrivateRoute exact path="/studentdetails/:id" component={StudentDetails} />
                     <Route exact path="/register" component={Register} />
                     <Route exact path="/login" component={Login} />
