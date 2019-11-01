@@ -31,7 +31,7 @@ const validateStudentInput = data => {
 const validateRoomInput = data => {
   const errors = {};
   const blocks = ['A', 'B', 'C', 'D'];
-  const genders = ['MALE', 'FEMALE'];
+  const genders = ['BOY', 'GIRL'];
 
   const { id, block, gender } = data
 
