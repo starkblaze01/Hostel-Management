@@ -27,13 +27,9 @@ router.post('/',  passport.authenticate('jwt', {session: false}), (req, res) => 
   const { errors, isValid } = validateRoomInput(req.body)
   if(!isValid) return res.status(400).json(errors)
   
-  const { id, block, gender } = req.body
+  // const { id, block, gender } = req.body
 
-  const room = new Room({
-    id,
-    block,
-    gender
-  })
+  const room = new Room(req.body)
 
   room.save()
     .then(data => res.json({ success: true, message: 'Room has been created.'}))

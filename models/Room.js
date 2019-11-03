@@ -22,6 +22,11 @@ const RoomSchema = new Schema({
     type: String,
     trim: true,
   },
+  time: {
+    type: String,
+    trim: true,
+    required: true
+  },
   gender: {
     type: String,
     enum: ['BOY', 'GIRL'],
