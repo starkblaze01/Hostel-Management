@@ -7,7 +7,7 @@ const { validateCleanerInput, validateStudentInput, validateRoomInput }  = requi
 
 // GET
 // Get a single room defined by id
-router.get('/:block',  passport.authenticate('jwt', {session: false}), (req, res) => {
+router.get('/block/:block',  passport.authenticate('jwt', {session: false}), (req, res) => {
   const { block } = req.params
   
   Room.find({ block }).then(room => res.json(room))
@@ -17,7 +17,7 @@ router.get('/:block',  passport.authenticate('jwt', {session: false}), (req, res
 
 // Get all rooms
 router.get('/all',  passport.authenticate('jwt', {session: false}), (req, res) => {
-  Room.find().then(room => res.json(room))
+  Room.find().then(rooms => res.json(rooms))
     .catch(err => res.status(400).json({ ...err, message: 'Failed to fetch rooms'}))
 })
 
@@ -42,16 +42,16 @@ router.post('/',  passport.authenticate('jwt', {session: false}), (req, res) => 
 
 // PUT
 // Assign a cleaner to a given room id
-router.put('/cleaner/:id', passport.authenticate('jwt', {session: false}), (req, res) => {
+router.put('/incharge/:id', passport.authenticate('jwt', {session: false}), (req, res) => {
   const { errors, isValid } = validateCleanerInput(req.body)
   if(!isValid) return res.status(400).json(errors)
   
-  const { cleaner } = req.body;
+  const { incharge } = req.body;
   const { id } = req.params;
 
-  Room.findOneAndUpdate(id, {$set: { cleaner }})
-    .then(data => res.json({success: true, message: 'Cleaner has been updated.'}))
-    .catch(err => res.status(400).json({...err, message: 'Failed to update the cleaner'}))
+  Room.findOneAndUpdate(id, {$set: { incharge }})
+    .then(data => res.json({success: true, message: 'Incharge has been updated.'}))
+    .catch(err => res.status(400).json({...err, message: 'Failed to update the incharge'}))
 })
 
 // Assign room to a studnet
@@ -64,6 +64,17 @@ router.put('/assign', passport.authenticate('jwt', {session: false}), (req, res)
   Room.findOneAndUpdate({id: roomId}, { students: studentIds })
     .then(data => res.json({ success: true, message: 'Student has been added to the provided room.'}))
     .catch(err => res.json({...err, message: 'Failed to assign student to the room.'}))
+})
+
+
+// DELETE 
+
+router.delete('/:_id', passport.authenticate('jwt', {session: false}), (req, res) => {
+  const { _id } = req.params
+
+  Room.findByIdAndDelete(_id)
+    .then(status => res.json({succes: true, message: 'Student has been deleted.'}))
+    .catch(err => res.json({...err, message: 'Failed to delete room.'}))
 })
 
 module.exports = router;

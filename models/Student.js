@@ -25,8 +25,17 @@ const StudentSchema = new Schema({
   },
   room: {
     type: String,
-  }
-  ,
+  },
+  block: {
+    type: String,
+    enum: ['A', 'B', 'C', 'D'],
+    trim: true,
+    required: true,
+  },
+  isAvailable: {
+    type: Boolean,
+    default: true,
+  },
   gender: {
     type: String,
     enum: ['BOY', 'GIRL'],

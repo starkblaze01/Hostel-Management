@@ -6,23 +6,19 @@ const RoomSchema = new Schema({
   id: {
     type: String,
     required: true,
-    unique: true,
     trim: true,
   },
-  students: [
-    {
-      type: String,
-      unique: true,
-      
-    }
-  ],
+  type: {
+    type: String,
+    enum: ['CLEANING', 'REPAIR']
+  },
   block: {
     type: String,
     enum: ['A', 'B', 'C', 'D'],
     required: true,
     trim: true
   },
-  cleaner: {
+  incharge: {
     type: String,
     trim: true,
   },
