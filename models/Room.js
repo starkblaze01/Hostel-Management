@@ -11,8 +11,8 @@ const RoomSchema = new Schema({
   },
   students: [
     {
-      type: Schema.Types.ObjectId,
-      ref: 'users',
+      type: String,
+      unique: true,
       
     }
   ],
@@ -28,7 +28,7 @@ const RoomSchema = new Schema({
   },
   gender: {
     type: String,
-    enum: ['MALE', 'FEMALE'],
+    enum: ['BOY', 'GIRL'],
     required: true,
   }
 });

@@ -15,6 +15,12 @@ router.get('/:block',  passport.authenticate('jwt', {session: false}), (req, res
 })
 
 
+// Get all rooms
+router.get('/all',  passport.authenticate('jwt', {session: false}), (req, res) => {
+  Room.find().then(room => res.json(room))
+    .catch(err => res.status(400).json({ ...err, message: 'Failed to fetch rooms'}))
+})
+
 // POST
 // Create a room
 router.post('/',  passport.authenticate('jwt', {session: false}), (req, res) => {
@@ -50,14 +56,12 @@ router.put('/cleaner/:id', passport.authenticate('jwt', {session: false}), (req,
 
 // Assign room to a studnet
 
-router.put('/student/:id', passport.authenticate('jwt', {session: false}), (req, res) => {
+router.put('/assign', passport.authenticate('jwt', {session: false}), (req, res) => {
   const { errors, isValid } = validateStudentInput(req.body)
   if(!isValid) return res.status(400).json(errors)  
-  
-  const { studentId } = req.body;
-  const { id } = req.params;
-
-  Room.findByIdAndUpdate(id, {$addToSet: { students: studentId }})
+  // studentIds is an array of college Ids and roomid is the room number
+  const { studentIds, roomId } = req.body;
+  Room.findOneAndUpdate({id: roomId}, { students: studentIds })
     .then(data => res.json({ success: true, message: 'Student has been added to the provided room.'}))
     .catch(err => res.json({...err, message: 'Failed to assign student to the room.'}))
 })
