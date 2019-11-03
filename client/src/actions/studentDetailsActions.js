@@ -7,10 +7,10 @@ import {
     DISABLE_STUDENT_DETAILS_LOADING,
 } from "./types";
 
-export const getStudentDetails = () => dispatch => {
+export const getStudentDetails = (batch) => dispatch => {
     dispatch(enableStudentDetailsLoading());
     axios
-        .get("/api/student/all")
+        .get(`/api/student/batch/${batch}`)
         .then((res) => {
 
             dispatch({
@@ -54,14 +54,17 @@ export const createStudentDetails = studentData => dispatch => {
                 type: GET_STUDENT_DETAILS,
                 payload: res.data
             });
-            dispatch(getStudentDetails());
+            console.log(res);
+            dispatch(getStudentDetails(studentData.batch));
         }
         )
-        .catch(err =>
+        .catch((err) => {
             dispatch({
                 type: GET_ERRORS,
                 payload: err.response.data,
-            })
+            });
+            console.log(err)
+        }
         );
 };
 
