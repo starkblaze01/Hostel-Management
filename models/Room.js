@@ -24,7 +24,8 @@ const RoomSchema = new Schema({
   },
   time: {
     type: String,
-    trim: true
+    trim: true,
+    required: true
   },
   gender: {
     type: String,
