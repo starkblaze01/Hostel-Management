@@ -91,7 +91,7 @@ router.put('/availability', passport.authenticate('jwt', {session: false}), (req
 // Delete a student with a student ID
 router.delete('/', passport.authenticate('jwt', {session: false}), (req, res) => {
   const { id } = req.body
-  Student.findOneAndDelete(id)
+  Student.findOneAndDelete({ id })
     .then(data => res.json({message: `Student with ID ${id} has been deleted`, success: true}))
     .catch(err => res.json({ messgae: 'Failed to remove the student', ...err, success: false}))
 })
