@@ -1,23 +1,23 @@
 import axios from "axios";
 
 import {
-    GET_STUDENT_DETAILS,
-    ENABLE_STUDENT_DETAILS_LOADING,
+    GET_ROOM_ACTION,
+    ENABLE_ROOM_ACTION_LOADING,
     GET_ERRORS,
-    DISABLE_STUDENT_DETAILS_LOADING,
+    DISABLE_ROOM_ACTION_LOADING,
 } from "./types";
 
-export const getStudentDetails = () => dispatch => {
-    dispatch(enableStudentDetailsLoading());
+export const getRoomAction = (block) => dispatch => {
+    dispatch(enableRoomActionLoading());
     axios
-        .get("/api/student/all")
+        .get(`/api/room/block/${block}`)
         .then((res) => {
 
             dispatch({
-                type: GET_STUDENT_DETAILS,
+                type: GET_ROOM_ACTION,
                 payload: res.data
             });
-            dispatch(disableStudentDetailsLoading());
+            dispatch(disableRoomActionLoading());
         }
         )
         .catch(err => {
@@ -28,33 +28,15 @@ export const getStudentDetails = () => dispatch => {
         });
 };
 
-export const deleteClass = cls => dispatch => {
+export const createRoomAction = roomActionData => dispatch => {
     axios
-        .delete(`/api/classAndsec/${cls}`)
-        .then(res =>
-            dispatch({
-                type: GET_STUDENT_DETAILS,
-                payload: res.data
-            })
-        )
-        .catch(err =>
-            dispatch({
-                type: GET_ERRORS,
-                payload: err.response.data
-            })
-        );
-};
-
-// Create Class
-export const createStudentDetails = studentData => dispatch => {
-    axios
-        .post("/api/student", studentData)
+        .post("/api/room/", roomActionData)
         .then((res) => {
             dispatch({
-                type: GET_STUDENT_DETAILS,
+                type: GET_ROOM_ACTION,
                 payload: res.data
             });
-            dispatch(getStudentDetails());
+            dispatch(getRoomAction(roomActionData.block));
         }
         )
         .catch(err =>
@@ -65,13 +47,13 @@ export const createStudentDetails = studentData => dispatch => {
         );
 };
 
-export const enableStudentDetailsLoading = () => {
+export const enableRoomActionLoading = () => {
     return {
-        type: ENABLE_STUDENT_DETAILS_LOADING
+        type: ENABLE_ROOM_ACTION_LOADING
     };
 };
-export const disableStudentDetailsLoading = () => {
+export const disableRoomActionLoading = () => {
     return {
-        type: DISABLE_STUDENT_DETAILS_LOADING
+        type: DISABLE_ROOM_ACTION_LOADING
     };
 };

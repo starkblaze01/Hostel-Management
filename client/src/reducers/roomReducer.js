@@ -1,4 +1,4 @@
-import { GET_STUDENT_DETAILS, ENABLE_STUDENT_DETAILS_LOADING, DISABLE_STUDENT_DETAILS_LOADING } from "../actions/types";
+import { GET_ROOM_ACTION, ENABLE_ROOM_ACTION_LOADING, DISABLE_ROOM_ACTION_LOADING } from "../actions/types";
 
 const initialState = {
     roomData: [],
@@ -7,17 +7,17 @@ const initialState = {
 
 export default function (state = initialState, action) {
     switch (action.type) {
-        case GET_STUDENT_DETAILS:
+        case GET_ROOM_ACTION:
             return {
                 ...state,
                 roomData: action.payload,
             };
-        case ENABLE_STUDENT_DETAILS_LOADING:
+        case ENABLE_ROOM_ACTION_LOADING:
             return {
                 ...state,
                 loading: true,
             }
-        case DISABLE_STUDENT_DETAILS_LOADING:
+        case DISABLE_ROOM_ACTION_LOADING:
             return {
                 ...state,
                 loading: false,

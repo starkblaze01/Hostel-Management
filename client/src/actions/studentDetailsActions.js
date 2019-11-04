@@ -28,24 +28,6 @@ export const getStudentDetails = (batch) => dispatch => {
         });
 };
 
-export const deleteClass = cls => dispatch => {
-    axios
-        .delete(`/api/classAndsec/${cls}`)
-        .then(res =>
-            dispatch({
-                type: GET_STUDENT_DETAILS,
-                payload: res.data
-            })
-        )
-        .catch(err =>
-            dispatch({
-                type: GET_ERRORS,
-                payload: err.response.data
-            })
-        );
-};
-
-// Create Class
 export const createStudentDetails = studentData => dispatch => {
     axios
         .post("/api/student", studentData)
