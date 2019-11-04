@@ -31,6 +31,11 @@ const RoomSchema = new Schema({
     type: String,
     enum: ['BOY', 'GIRL'],
     required: true,
+  },
+  timestamp: {
+    type: String,
+    trim: true,
+    required: true
   }
 });
 
