@@ -3,7 +3,7 @@ const isEmpty = require("./is-empty");
 
 module.exports = function validateStudentInput(data) {
   const errors = {};
-  const genders = ['BOY', 'GIRL']
+  const genders = ['MALE', 'FEMALE']
   
   data.name = !isEmpty(data.name) ? data.name : "";
   data.email = !isEmpty(data.email) ? data.email : "";
