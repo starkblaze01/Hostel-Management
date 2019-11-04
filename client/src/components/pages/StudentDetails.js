@@ -51,12 +51,10 @@ class StudentDetails extends Component {
         });
     }
     async onDelete(id) {
-        console.log(id);
         await axios.delete(`/api/student`, { data: { id } }).then(res => console.log(res)).catch(err => console.log(err));
         await this.props.getStudentDetails(this.props.match.params.id);
     }
     async onStatusChange(id, isAvailable) {
-        console.log(id);
         await axios.put(`/api/student/availability`, { id, isAvailable: !isAvailable }).then(res => console.log(res)).catch(err => console.log(err));
         await this.props.getStudentDetails(this.props.match.params.id);
     }

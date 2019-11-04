@@ -8,8 +8,8 @@ class Student extends Component {
         this.state = {
             findBy: '',
             val: '',
-            errors: '',
             data: {},
+            errors: {},
         }
         this.onChange = this.onChange.bind(this);
         this.onFtechDetails = this.onFtechDetails.bind(this);
@@ -20,12 +20,10 @@ class Student extends Component {
         this.setState({ [e.target.name]: e.target.value });
     }
     async onDelete(id) {
-        console.log(id);
         await axios.delete(`/api/student`, { data: { id } }).then(res => console.log(res)).catch(err => console.log(err));
         await this.onFtechDetails();
     }
     async onStatusChange(id, isAvailable) {
-        console.log(id);
         await axios.put(`/api/student/availability`, { id, isAvailable: !isAvailable }).then(res => console.log(res)).catch(err => console.log(err));
         await this.onFtechDetails();
     }
@@ -52,8 +50,29 @@ class Student extends Component {
             ).catch(err =>
                 console.log(err)
             );
+        } else if (this.state.findBy === 'isAvailable') {
+            await axios.get(`/api/student/all`).then((res) => {
+                let tempVal = this.state.val;
+                tempVal = tempVal.trim().toLowerCase();
+                if (tempVal === 'absent') {
+                    tempVal = false
+                } else if (tempVal === 'present') {
+                    tempVal = true
+                }
+                const filteredData = res.data ? res.data.filter(el => el.isAvailable === tempVal
+                ) : [];
+                const data = {
+                    data: filteredData
+                }
+                this.setState({ data: data });
+                if (!res.data) {
+                    alert("Not Found");
+                }
+            }
+            ).catch(err =>
+                console.log(err)
+            );
         } else {
-            console.log('lol ho gya')
             return alert('Select Room number or Student Id?');
         }
     }
@@ -148,6 +167,7 @@ class Student extends Component {
                     >   <option value="" defaultValue disabled>Select</option>
                         <option value="id">Student Id</option>
                         <option value="room">Room No.</option>
+                        <option value="isAvailable">Absent/Present</option>
                     </select>
                     <input type="text" id="val" placeholder="Value"
                         className={classnames("form-control", {
@@ -161,7 +181,7 @@ class Student extends Component {
                     {errors.room && (
                         <div className="invalid-tooltip">{errors.room}</div>
                     )}
-                    <button className="btn btn-primary" style={{ width: '100px' }} onClick={this.onFtechDetails}><tiny>Find Details</tiny></button>
+                    <button className="btn btn-primary" style={{ fontSize: '12px', width: '200px' }} onClick={this.onFtechDetails}>Find Details</button>
                 </div>
                 <div style={{ marginTop: '50px', overflow: 'scroll', maxHeight: 800 }}>
                     <table className="table table-striped table-hover">
