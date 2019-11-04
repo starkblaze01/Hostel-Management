@@ -54,6 +54,9 @@ class StudentDetails extends Component {
         await axios.delete(`/api/student`, { data: { id } }).then(res => console.log(res)).catch(err => console.log(err));
         await this.props.getStudentDetails(this.props.match.params.id);
     }
+    async onStatusChange(id) {
+        console.log()
+    }
     UNSAFE_componentWillReceiveProps(nextProps) {
         if (nextProps.errors) {
             this.setState({ errors: nextProps.errors });
@@ -70,7 +73,7 @@ class StudentDetails extends Component {
             tableContent = null
         ) : tableContent = studentData.length ? studentData.map(
             el =>
-                <tr key={studentData.indexOf(el)} >
+                <tr key={el._id} >
                     <th scope="row">{studentData.indexOf(el) + 1}</th>
                     <td>{el.name ? el.name : "-"}</td>
                     <td>{el.email ? el.email : "-"}</td>
@@ -78,7 +81,9 @@ class StudentDetails extends Component {
                     <td>{el.block ? el.block : "-"}</td>
                     <td>{el.room ? el.room : "-"}</td>
                     <td>{el.gender ? el.gender : "-"}</td>
-                    <td>{el.isAvailable ? <button type="button" className="btn btn-primary" data-toggle="tooltip" data-placement="right" title="Click to Change Status">
+                    <td>{el.isAvailable ? <button type="button" className="btn btn-primary" data-toggle="tooltip" data-placement="right" title="Click to Change Status"
+                        onClick={() => this.onStatusChange(el.id)}
+                    >
                         Present
                     </button>
                         : <button type="button" className="btn btn-danger" data-toggle="tooltip" data-placement="right" title="Click to Change Status">

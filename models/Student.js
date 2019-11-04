@@ -38,7 +38,7 @@ const StudentSchema = new Schema({
   },
   gender: {
     type: String,
-    enum: ['BOY', 'GIRL'],
+    enum: ['MALE', 'FEMALE'],
     required: true,
   }
 });
