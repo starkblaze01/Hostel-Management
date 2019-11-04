@@ -22,6 +22,7 @@ class StudentDetails extends Component {
         this.onChange = this.onChange.bind(this);
         this.onSubmit = this.onSubmit.bind(this);
         this.onDelete = this.onDelete.bind(this);
+        this.onStatusChange = this.onStatusChange.bind(this);
     }
     onChange(e) {
         this.setState({ [e.target.name]: e.target.value });
@@ -83,12 +84,12 @@ class StudentDetails extends Component {
                     <td>{el.block ? el.block : "-"}</td>
                     <td>{el.room ? el.room : "-"}</td>
                     <td>{el.gender ? el.gender : "-"}</td>
-                    <td>{el.isAvailable ? <button type="button" className="btn btn-primary" data-toggle="tooltip" data-placement="right" title="Click to Change Status"
+                    <td>{el.isAvailable ? <button type="button" className="btn btn-primary" data-toggle="tooltip" data-placement="right" title="Click to Mark Absent"
                         onClick={() => this.onStatusChange(el.id, el.isAvailable)}
                     >
                         Present
                     </button>
-                        : <button type="button" className="btn btn-danger" data-toggle="tooltip" data-placement="right" title="Click to Change Status"
+                        : <button type="button" className="btn btn-danger" data-toggle="tooltip" data-placement="right" title="Click to Mark Present"
                             onClick={() => this.onStatusChange(el.id, el.isAvailable)}
                         >
                             Absent
@@ -166,7 +167,7 @@ class StudentDetails extends Component {
                         </div>
                         <div className="col">
                             <label htmlFor="room">Room No.</label>
-                            <input type="number" id="room" placeholder="Room No."
+                            <input type="text" id="room" placeholder="Room No."
                                 className={classnames("form-control", {
                                     "is-invalid": errors.room
                                 })}
