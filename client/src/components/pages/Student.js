@@ -1,11 +1,23 @@
 import React, { Component } from 'react';
+import classnames from "classnames";
 
 class Student extends Component {
-
+    constructor(props) {
+        super(props);
+        this.state = {
+            findBy: '',
+            errors: ''
+        }
+        this.onChange = this.onChange.bind(this);
+    }
+    onChange(e) {
+        this.setState({ [e.target.name]: e.target.value });
+    }
     onBatchSelect(batch) {
         this.props.history.push(`/studentdetails/${batch}`);
     }
     render() {
+        const { errors } = this.state;
         return (
             <div style={{ height: '100vh' }}>
                 <div style={{ display: 'flex', justifyContent: 'space-between' }}>
@@ -49,6 +61,24 @@ class Student extends Component {
                             }}>Add or Check Info</p>
                         </div>
                     </div>
+                </div>
+                <br />
+                <label htmlFor="find">Find By</label>
+                <div className="col-5 input-group-prepend">
+                    <select className={classnames("form-control", {
+                        "is-invalid": errors.room
+                    })}
+                        id="find" onChange={this.onChange} value={this.state.findBy}
+                        name="findBy"
+                    >   <option value="" defaultValue disabled>Select</option>
+                        <option >Student Id</option>
+                        <option >Room No.</option>
+                    </select>
+                    {errors.gender && (
+                        <div className="invalid-tooltip">{errors.gender}</div>
+                    )}
+                    <input type="text" className="form-control" aria-label="Text input with segmented dropdown button" />
+                    <button className="btn btn-primary">Fetch</button>
                 </div>
             </div>
         );

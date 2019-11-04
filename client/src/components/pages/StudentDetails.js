@@ -54,8 +54,10 @@ class StudentDetails extends Component {
         await axios.delete(`/api/student`, { data: { id } }).then(res => console.log(res)).catch(err => console.log(err));
         await this.props.getStudentDetails(this.props.match.params.id);
     }
-    async onStatusChange(id) {
-        console.log()
+    async onStatusChange(id, isAvailable) {
+        console.log(id);
+        await axios.put(`/api/student/availability`, { id, isAvailable: !isAvailable }).then(res => console.log(res)).catch(err => console.log(err));
+        await this.props.getStudentDetails(this.props.match.params.id);
     }
     UNSAFE_componentWillReceiveProps(nextProps) {
         if (nextProps.errors) {
@@ -82,11 +84,13 @@ class StudentDetails extends Component {
                     <td>{el.room ? el.room : "-"}</td>
                     <td>{el.gender ? el.gender : "-"}</td>
                     <td>{el.isAvailable ? <button type="button" className="btn btn-primary" data-toggle="tooltip" data-placement="right" title="Click to Change Status"
-                        onClick={() => this.onStatusChange(el.id)}
+                        onClick={() => this.onStatusChange(el.id, el.isAvailable)}
                     >
                         Present
                     </button>
-                        : <button type="button" className="btn btn-danger" data-toggle="tooltip" data-placement="right" title="Click to Change Status">
+                        : <button type="button" className="btn btn-danger" data-toggle="tooltip" data-placement="right" title="Click to Change Status"
+                            onClick={() => this.onStatusChange(el.id, el.isAvailable)}
+                        >
                             Absent
                     </button>}</td>
                     <td style={{ cursor: 'pointer', color: '#00a4eb' }}
@@ -182,8 +186,8 @@ class StudentDetails extends Component {
                                 id="exampleFormControlSelect1" onChange={this.onChange} value={this.state.gender}
                                 name="gender"
                             >   <option value="" defaultValue disabled>Select Gender</option>
-                                <option >GIRL</option>
-                                <option >BOY</option>
+                                <option >FEMALE</option>
+                                <option >MALE</option>
                             </select>
                             {errors.gender && (
                                 <div className="invalid-tooltip">{errors.gender}</div>
