@@ -7,6 +7,7 @@ const students = require("./routers/api/student");
 const room = require("./routers/api/room");
 const profile = require("./routers/api/profile");
 const projects = require("./routers/api/projects");
+const staff = require("./routers/api/staff");
 
 const app = express();
 
@@ -35,6 +36,7 @@ app.use("/api/profile", profile);
 app.use("/api/projects", projects);
 app.use("/api/student", students);
 app.use("/api/room", room);
+app.use("/api/staff", staff);
 
 const port = process.env.PORT || 5000;
 
