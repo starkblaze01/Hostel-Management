@@ -38,22 +38,16 @@ class Dashboard extends Component {
               <a href="/" className="card-link">Another link</a>
             </div>
           </div>
-          <a href="/student">
-            <div className="card hoverable" style={{ width: "18rem", hover: '' }}>
-              <img src={student} className="card-img-top" alt="Cleaning" />
-              <div className="card-body">
-                <h5 className="card-title">Student Info</h5>
-                <p className="card-text">Click to check student's info.</p>
-              </div>
-              <ul className="list-group list-group-flush">
-                <li className="list-group-item">Some Status</li>
-              </ul>
-              <div className="card-body">
-                <p className="card-link">Some link</p>
-                <p className="card-link">Another link</p>
-              </div>
+          <div className="card hoverable" style={{ width: "18rem", hover: '', height: '22rem' }}>
+            <img src={student} className="card-img-top" alt="Cleaning" />
+            <div className="card-body" style={{ height: '10rem' }}>
+              <h5 className="card-title">Student</h5>
+              <a href="/student" className="card-text">
+                Add new Student or Check Info
+              </a>
+
             </div>
-          </a>
+          </div>
           <div className="card" style={{ width: "18rem" }}>
             <img src={staff} className="card-img-top" alt="Cleaning" />
             <div className="card-body">

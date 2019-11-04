@@ -3,21 +3,26 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import classnames from "classnames";
 import { createStudentDetails, getStudentDetails } from '../../actions/studentDetailsActions';
+import axios from "axios";
 
 class StudentDetails extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            batch: '2016',
+            batch: this.props.match.params.id,
             name: '',
             email: '',
             id: '',
             gender: '',
             room: '',
+            block: '',
+            isAvailable: true,
             errors: {}
         }
         this.onChange = this.onChange.bind(this);
         this.onSubmit = this.onSubmit.bind(this);
+        this.onDelete = this.onDelete.bind(this);
+        this.onStatusChange = this.onStatusChange.bind(this);
     }
     onChange(e) {
         this.setState({ [e.target.name]: e.target.value });
@@ -30,6 +35,7 @@ class StudentDetails extends Component {
             batch: this.state.batch,
             id: this.state.id,
             room: this.state.room,
+            block: this.state.block,
             gender: this.state.gender,
         }
         console.table(studentDetailsData);
@@ -40,8 +46,17 @@ class StudentDetails extends Component {
             id: '',
             gender: '',
             room: '',
+            block: '',
             errors: {}
         });
+    }
+    async onDelete(id) {
+        await axios.delete(`/api/student`, { data: { id } }).then(res => console.log(res)).catch(err => console.log(err));
+        await this.props.getStudentDetails(this.props.match.params.id);
+    }
+    async onStatusChange(id, isAvailable) {
+        await axios.put(`/api/student/availability`, { id, isAvailable: !isAvailable }).then(res => console.log(res)).catch(err => console.log(err));
+        await this.props.getStudentDetails(this.props.match.params.id);
     }
     UNSAFE_componentWillReceiveProps(nextProps) {
         if (nextProps.errors) {
@@ -49,7 +64,7 @@ class StudentDetails extends Component {
         }
     }
     async componentDidMount() {
-        await this.props.getStudentDetails();
+        await this.props.getStudentDetails(this.props.match.params.id);
     }
 
     render() {
@@ -59,13 +74,30 @@ class StudentDetails extends Component {
             tableContent = null
         ) : tableContent = studentData.length ? studentData.map(
             el =>
-                <tr key={studentData.indexOf(el)} >
+                <tr key={el._id} >
                     <th scope="row">{studentData.indexOf(el) + 1}</th>
-                    <td>{el.name ? el.name : ""}</td>
-                    <td>{el.email ? el.email : ""}</td>
-                    <td>{el.id ? el.id : ""}</td>
-                    <td>{el.room ? el.room : ""}</td>
-                    <td>{el.gender ? el.gender : ""}</td>
+                    <td>{el.name ? el.name : "-"}</td>
+                    <td>{el.email ? el.email : "-"}</td>
+                    <td>{el.id ? el.id : "-"}</td>
+                    <td>{el.block ? el.block : "-"}</td>
+                    <td>{el.room ? el.room : "-"}</td>
+                    <td>{el.gender ? el.gender : "-"}</td>
+                    <td>{el.isAvailable ? <button type="button" className="btn btn-primary" data-toggle="tooltip" data-placement="right" title="Click to Mark Absent"
+                        onClick={() => this.onStatusChange(el.id, el.isAvailable)}
+                    >
+                        Present
+                    </button>
+                        : <button type="button" className="btn btn-danger" data-toggle="tooltip" data-placement="right" title="Click to Mark Present"
+                            onClick={() => this.onStatusChange(el.id, el.isAvailable)}
+                        >
+                            Absent
+                    </button>}</td>
+                    <td style={{ cursor: 'pointer', color: '#00a4eb' }}
+                        onClick=
+                        {() => this.onDelete(el.id)}
+                    >
+                        Click Me
+                    </td>
                 </tr>
         ) : null
         const { errors } = this.state;
@@ -118,8 +150,22 @@ class StudentDetails extends Component {
                             )}
                         </div>
                         <div className="col">
+                            <label htmlFor="block">Block</label>
+                            <input type="text" id="block" placeholder="Block"
+                                className={classnames("form-control", {
+                                    "is-invalid": errors.block
+                                })}
+                                onChange={this.onChange}
+                                name="block"
+                                value={this.state.block}
+                            />
+                            {errors.block && (
+                                <div className="invalid-tooltip">{errors.block}</div>
+                            )}
+                        </div>
+                        <div className="col">
                             <label htmlFor="room">Room No.</label>
-                            <input type="number" id="room" placeholder="Room No."
+                            <input type="text" id="room" placeholder="Room No."
                                 className={classnames("form-control", {
                                     "is-invalid": errors.room
                                 })}
@@ -159,8 +205,11 @@ class StudentDetails extends Component {
                                 <th scope="col">Name</th>
                                 <th scope="col">Email</th>
                                 <th scope="col">ID</th>
+                                <th scope="col">Block</th>
                                 <th scope="col">Room No.</th>
                                 <th scope="col">Gender</th>
+                                <th scope="col">Leave Status</th>
+                                <th scope="col">Delete?</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -183,4 +232,5 @@ const mapStateToProps = state => ({
     errors: state.errors,
     studentDetails: state.studentDetails,
 });
+
 export default connect(mapStateToProps, { createStudentDetails, getStudentDetails })(StudentDetails);
