@@ -4,11 +4,14 @@
   "description": "Login Portal",
   "main": "server.js",
   "scripts": {
+    "test": "export NODE_ENV=test || SET \"NODE_ENV=TEST\" && mocha server/**/*.test.js",
+    "testIt": "npm test",
     "client-install": "npm install --prefix client",
     "start": "node server.js",
     "server": "nodemon server.js",
     "client": "npm start --prefix client",
-    "dev": "concurrently \"npm run server\" \"npm run client\""
+    "dev": "concurrently \"npm run server\" \"npm run client\"",
+    "heroku-postbuild": "NPM_CONFIG_PRODUCTION=false npm install --prefix client && npm run build --prefix client"
   },
   "repository": {
     "type": "git",
