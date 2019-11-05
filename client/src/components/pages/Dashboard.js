@@ -18,7 +18,7 @@ class Dashboard extends Component {
   render() {
     const { user } = this.props.auth;
     return (
-      <div>
+      <div className="mid">
         <div className="text-center" style={{ fontSize: "25px" }}>
           Welcome {user.name}!
         </div>
