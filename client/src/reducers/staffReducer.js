@@ -1,23 +1,23 @@
-import { GET_ROOM_ACTION, ENABLE_ROOM_ACTION_LOADING, DISABLE_ROOM_ACTION_LOADING } from "../actions/types";
+import { GET_STAFF_DETAILS, ENABLE_STAFF_LOADING, DISABLE_STAFF_LOADING } from "../actions/types";
 
 const initialState = {
-    roomData: [],
+    staffData: [],
     loading: false,
 };
 
 export default function (state = initialState, action) {
     switch (action.type) {
-        case GET_ROOM_ACTION:
+        case GET_STAFF_DETAILS:
             return {
                 ...state,
-                roomData: action.payload,
+                staffData: action.payload,
             };
-        case ENABLE_ROOM_ACTION_LOADING:
+        case ENABLE_STAFF_LOADING:
             return {
                 ...state,
                 loading: true,
             }
-        case DISABLE_ROOM_ACTION_LOADING:
+        case DISABLE_STAFF_LOADING:
             return {
                 ...state,
                 loading: false,

@@ -27,7 +27,7 @@ class StudentDetails extends Component {
     onChange(e) {
         this.setState({ [e.target.name]: e.target.value });
     }
-    onSubmit(e) {
+    async onSubmit(e) {
         e.preventDefault();
         const studentDetailsData = {
             name: this.state.name,
@@ -38,8 +38,7 @@ class StudentDetails extends Component {
             block: this.state.block,
             gender: this.state.gender,
         }
-        console.table(studentDetailsData);
-        this.props.createStudentDetails(studentDetailsData);
+        await this.props.createStudentDetails(studentDetailsData);
         this.setState({
             name: '',
             email: '',
