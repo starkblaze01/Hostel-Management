@@ -11,7 +11,7 @@ import Student from './pages/Student';
 import StudentDetails from './pages/StudentDetails';
 import Block from './pages/Block';
 import RoomAction from "./pages/RoomAction";
-
+import Staff from './pages/Staff';
 
 class Routes extends Component {
     render() {
@@ -19,11 +19,12 @@ class Routes extends Component {
             < div className="App" >
                 <Navbar />
                 <Route exact path="/" component={Home} />
-                <div className="container">
+                <div className="container mid">
                     <PrivateRoute exact path="/dashboard" component={Dashboard} />
                     <PrivateRoute exact path="/student" component={Student} />
                     <PrivateRoute exact path="/block" component={Block} />
                     <PrivateRoute exact path="/room/:id" component={RoomAction} />
+                    <PrivateRoute exact path="/staff" component={Staff} />
                     <PrivateRoute exact path="/studentdetails/:id" component={StudentDetails} />
                     <Route exact path="/register" component={Register} />
                     <Route exact path="/login" component={Login} />

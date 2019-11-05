@@ -4,7 +4,7 @@ import { connect } from "react-redux";
 import { getCurrentUser } from "../../actions/authActions";
 
 
-const clean = require("../../img/cleaning.jpg");
+// const clean = require("../../img/cleaning.jpg");
 const student = require("../../img/student.jpg");
 const staff = require("../../img/staff.jpeg");
 const bedRoom = require("../../img/bedroom.jpeg");
@@ -18,69 +18,43 @@ class Dashboard extends Component {
   render() {
     const { user } = this.props.auth;
     return (
-      <div className="mid">
-        {/* {console.log(getCurrentUser().email)} */}
+      <div>
         <div className="text-center" style={{ fontSize: "25px" }}>
           Welcome {user.name}!
         </div>
         <div style={{ display: 'flex', justifyContent: 'space-between', marginTop: '2rem' }}>
-          <div className="card" style={{ width: "18rem" }}>
-            <img src={clean} className="card-img-top" alt="Cleaning" />
-            <div className="card-body">
-              <h5 className="card-title">Cleaning</h5>
-              <p className="card-text">Check the cleaning status of rooms.</p>
-            </div>
-            <ul className="list-group list-group-flush">
-              <li className="list-group-item">Some status</li>
-            </ul>
-            <div className="card-body">
-              <a href="/" className="card-link">Some link</a>
-              <a href="/" className="card-link">Another link</a>
-            </div>
-          </div>
+
           <div className="card hoverable" style={{ width: "18rem", hover: '', height: '22rem' }}>
             <img src={student} className="card-img-top" alt="Cleaning" />
             <div className="card-body" style={{ height: '10rem' }}>
               <h5 className="card-title">Student</h5>
               <a href="/student" className="card-text">
-                Add new Student or Check Info
+                Add new Student and allot Room or Check Info
               </a>
-
             </div>
           </div>
-          <div className="card" style={{ width: "18rem" }}>
+
+          <div className="card" style={{ width: "18rem", hover: '', height: '22rem' }}>
+            <img src={bedRoom} className="card-img-top" alt="Cleaning" />
+            <div className="card-body">
+              <h5 className="card-title">Room Repair/Cleaning Status</h5>
+              <a href="/block">
+                Add Room Repair/Cleaning or Check Info
+                </a>
+            </div>
+          </div>
+
+          <div className="card" style={{ width: "18rem", hover: '', height: '22rem' }}>
             <img src={staff} className="card-img-top" alt="Cleaning" />
             <div className="card-body">
-              <h5 className="card-title">Worker Info</h5>
-              <p className="card-text">Click to check worker's status</p>
-            </div>
-            <ul className="list-group list-group-flush">
-              <li className="list-group-item">Some Status</li>
-            </ul>
-            <div className="card-body">
-              <a href="/" className="card-link">Some link</a>
-              <a href="/" className="card-link">Another link</a>
+              <h5 className="card-title">Staff Info</h5>
+              <a href="/staff">
+                Add more Staff or Check their info
+              </a>
             </div>
           </div>
+
         </div>
-        <a href="/block">
-          <div style={{ display: 'flex', marginTop: '5rem' }}>
-            <div className="card" style={{ width: "18rem" }}>
-              <img src={bedRoom} className="card-img-top" alt="Cleaning" />
-              <div className="card-body">
-                <h5 className="card-title">Rooms</h5>
-                <p className="card-text">Room Allotment Status</p>
-              </div>
-              <ul className="list-group list-group-flush">
-                <li className="list-group-item">Click to see more</li>
-              </ul>
-              <div className="card-body">
-                <p href="/" className="card-link">Some link</p>
-                <p href="/" className="card-link">Another link</p>
-              </div>
-            </div>
-          </div>
-        </a>
       </div>
     );
   }

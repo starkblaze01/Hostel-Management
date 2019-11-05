@@ -20,7 +20,7 @@ export const getRoomAction = (block) => dispatch => {
             dispatch(disableRoomActionLoading());
         }
         )
-        .catch(err => {
+        .catch((err) => {
             dispatch({
                 type: GET_ERRORS,
                 payload: {}
@@ -39,11 +39,12 @@ export const createRoomAction = roomActionData => dispatch => {
             dispatch(getRoomAction(roomActionData.block));
         }
         )
-        .catch(err =>
+        .catch((err) => {
             dispatch({
                 type: GET_ERRORS,
                 payload: err.response.data,
-            })
+            });
+        }
         );
 };
 

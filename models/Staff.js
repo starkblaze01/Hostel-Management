@@ -17,7 +17,11 @@ const StaffSchema = new Schema({
     type: Number,
     required: true,
     unique: true,
-  }
+  },
+  isAvailable: {
+    type: Boolean,
+    default: true,
+  },
 });
 
 module.exports = Staff = mongoose.model("staff", StaffSchema);

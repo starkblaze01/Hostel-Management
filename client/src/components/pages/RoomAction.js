@@ -24,12 +24,13 @@ class RoomAction extends Component {
     onChange(e) {
         this.setState({ [e.target.name]: e.target.value });
     }
-    async onDelete(id) {
-        await axios.delete(`/api/room/${id}`).then(res => console.log(res)).catch(err => console.log(err));
+    async onDelete(_id) {
+        await axios.delete(`/api/room/${_id}`).then(res => console.log(res)).catch(err => console.log(err));
         await this.props.getRoomAction(this.props.match.params.id);
     }
     async onSubmit(e) {
         e.preventDefault();
+        console.log(this.props.match.params.id);
         const activityRecord = {
             type: this.state.type,
             incharge: this.state.incharge,
@@ -45,7 +46,6 @@ class RoomAction extends Component {
             type: '',
             id: '',
             gender: '',
-            block: '',
             time: '',
             errors: {}
         });
@@ -56,7 +56,6 @@ class RoomAction extends Component {
         }
     }
     async componentDidMount() {
-        console.log(this.props.match.params.id);
         await this.props.getRoomAction(this.props.match.params.id);
     }
     render() {
