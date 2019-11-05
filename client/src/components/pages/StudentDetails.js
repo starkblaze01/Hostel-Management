@@ -101,7 +101,7 @@ class StudentDetails extends Component {
         ) : null
         const { errors } = this.state;
         return (
-            <div style={{ height: '100vh' }}>
+            <div className="mid">
                 <h1>{this.state.batch}</h1>
                 <br />
                 <form onSubmit={this.onSubmit}>
