@@ -40,7 +40,7 @@ app.use("/api/room", room);
 app.use("/api/staff", staff);
 
 // Server static assets if in production
-if (process.env.NODE_ENV === "development") {
+if (process.env.NODE_ENV === "production") {
   //Set static folder
   app.use(express.static("client/build"));
   app.get("*", (req, res) => {
