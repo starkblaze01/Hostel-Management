@@ -8,6 +8,7 @@ const room = require("./routers/api/room");
 const profile = require("./routers/api/profile");
 const projects = require("./routers/api/projects");
 const staff = require("./routers/api/staff");
+const path = require("path");
 
 const app = express();
 
@@ -39,7 +40,7 @@ app.use("/api/room", room);
 app.use("/api/staff", staff);
 
 // Server static assets if in production
-if (process.env.NODE_ENV === "production") {
+if (process.env.NODE_ENV === "development") {
   //Set static folder
   app.use(express.static("client/build"));
   app.get("*", (req, res) => {
