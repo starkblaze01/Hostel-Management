@@ -10,15 +10,15 @@ const staff = require("../../img/staff.jpeg");
 const bedRoom = require("../../img/bedroom.jpeg");
 class Dashboard extends Component {
   componentDidMount() {
-    if (this.props.auth.isAuthenticated) {
-      this.props.history.push("/dashboard");
+    if (!this.props.auth.isAuthenticated) {
+      this.props.history.push("/");
     }
   }
 
   render() {
     const { user } = this.props.auth;
     return (
-      <div className="mid">
+      <div className="mid container">
         <div className="text-center" style={{ fontSize: "25px" }}>
           Welcome {user.name}!
         </div>

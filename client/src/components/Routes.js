@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Route, Redirect } from "react-router-dom";
+import { Route, Redirect, Switch } from "react-router-dom";
 import Navbar from "./layout/Navbar";
 import Footer from "./layout/Footer";
 import Home from "./layout/Home";
@@ -18,8 +18,8 @@ class Routes extends Component {
         return (
             < div className="App" >
                 <Navbar />
-                <Route exact path="/" component={Home} />
-                <div className="container">
+                <Switch>
+                    <Route exact path="/" component={Home} />
                     <PrivateRoute exact path="/dashboard" component={Dashboard} />
                     <PrivateRoute exact path="/student" component={Student} />
                     <PrivateRoute exact path="/block" component={Block} />
@@ -28,8 +28,8 @@ class Routes extends Component {
                     <PrivateRoute exact path="/studentdetails/:id" component={StudentDetails} />
                     <Route exact path="/register" component={Register} />
                     <Route exact path="/login" component={Login} />
-                    <Redirect to="/" />
-                </div>
+                    <Redirect to="/dashboard" />
+                </Switch>
                 <Footer />
             </div >
         )
