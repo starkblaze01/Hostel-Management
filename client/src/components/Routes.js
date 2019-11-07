@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Route } from "react-router-dom";
+import { Route, Redirect } from "react-router-dom";
 import Navbar from "./layout/Navbar";
 import Footer from "./layout/Footer";
 import Home from "./layout/Home";
@@ -28,6 +28,7 @@ class Routes extends Component {
                     <PrivateRoute exact path="/studentdetails/:id" component={StudentDetails} />
                     <Route exact path="/register" component={Register} />
                     <Route exact path="/login" component={Login} />
+                    <Redirect to="/" />
                 </div>
                 <Footer />
             </div >
