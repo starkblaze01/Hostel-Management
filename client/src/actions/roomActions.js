@@ -44,6 +44,7 @@ export const createRoomAction = roomActionData => dispatch => {
                 type: GET_ERRORS,
                 payload: err.response.data,
             });
+            err.response.data.message ? alert(err.response.data.message) : console.log(err);
         }
         );
 };

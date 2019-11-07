@@ -19,7 +19,7 @@ class Routes extends Component {
             < div className="App" >
                 <Navbar />
                 <Route exact path="/" component={Home} />
-                <div className="container mid">
+                <div className="container">
                     <PrivateRoute exact path="/dashboard" component={Dashboard} />
                     <PrivateRoute exact path="/student" component={Student} />
                     <PrivateRoute exact path="/block" component={Block} />

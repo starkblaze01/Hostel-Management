@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import classnames from "classnames";
 import { createStudentDetails, getStudentDetails } from '../../actions/studentDetailsActions';
 import axios from "axios";
+import ReactLoading from 'react-loading';
 
 class StudentDetails extends Component {
     constructor(props) {
@@ -177,15 +178,15 @@ class StudentDetails extends Component {
                             )}
                         </div>
                         <div className="col">
-                            <label htmlFor="exampleFormControlSelect1">Gender</label>
+                            <label htmlFor="gen">Gender</label>
                             <select className={classnames("form-control", {
-                                "is-invalid": errors.room
+                                "is-invalid": errors.gender
                             })}
-                                id="exampleFormControlSelect1" onChange={this.onChange} value={this.state.gender}
+                                id="gen" onChange={this.onChange} value={this.state.gender}
                                 name="gender"
                             >   <option value="" defaultValue disabled>Select Gender</option>
-                                <option >FEMALE</option>
-                                <option >MALE</option>
+                                <option value="FEMALE">FEMALE</option>
+                                <option value="MALE">MALE</option>
                             </select>
                             {errors.gender && (
                                 <div className="invalid-tooltip">{errors.gender}</div>
@@ -197,7 +198,7 @@ class StudentDetails extends Component {
                     </div>
                 </form>
                 <div style={{ marginTop: '50px', overflow: 'scroll', maxHeight: 800 }}>
-                    <table className="table table-striped table-hover">
+                    {!loading ? <table className="table table-striped table-hover">
                         <thead className="thead-dark">
                             <tr>
                                 <th scope="col">#</th>
@@ -214,7 +215,7 @@ class StudentDetails extends Component {
                         <tbody>
                             {tableContent}
                         </tbody>
-                    </table>
+                    </table> : <div style={{ display: 'flex', justifyContent: 'center' }}><ReactLoading type="bars" color="#f56f42" /></div>}
                 </div>
             </div>
         );

@@ -15,7 +15,7 @@ router.get('/', passport.authenticate('jwt', { session: false }), (req, res) => 
 
 router.post('/', passport.authenticate('jwt', { session: false }), (req, res) => {
   const { errors, isValid } = staffValidation(req.body)
-  if (!isValid) return res.json(errors)
+  if (!isValid) return res.status(400).json(errors)
 
   const newStaff = new Staff(req.body)
 

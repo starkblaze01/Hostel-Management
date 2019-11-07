@@ -23,7 +23,7 @@ export const getStaffDetails = () => dispatch => {
         .catch((err) => {
             dispatch({
                 type: GET_ERRORS,
-                payload: {}
+                payload: err.response.data
             });
         });
 };

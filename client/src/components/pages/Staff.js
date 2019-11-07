@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import classnames from "classnames";
 import { createStaffDetails, getStaffDetails } from '../../actions/staffActions';
 import axios from 'axios';
+import ReactLoading from 'react-loading';
 
 class Staff extends Component {
     constructor(props) {
@@ -140,7 +141,7 @@ class Staff extends Component {
                 </form>
 
                 <div style={{ marginTop: '50px', overflow: 'scroll', maxHeight: 800 }}>
-                    <table className="table table-striped table-hover">
+                    {!loading ? <table className="table table-striped table-hover">
                         <thead className="thead-dark">
                             <tr>
                                 <th scope="col">#</th>
@@ -154,7 +155,7 @@ class Staff extends Component {
                         <tbody>
                             {tableContent}
                         </tbody>
-                    </table>
+                    </table> : <div style={{ display: 'flex', justifyContent: 'center' }}><ReactLoading type="bars" color="#f56f42" /></div>}
                 </div>
             </div>
         );

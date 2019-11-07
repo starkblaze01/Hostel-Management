@@ -45,7 +45,7 @@ export const createStudentDetails = studentData => dispatch => {
                 type: GET_ERRORS,
                 payload: err.response.data,
             });
-            console.log(err)
+            err.response.data.error ? alert(err.response.data.error) : console.log(err);
         }
         );
 };

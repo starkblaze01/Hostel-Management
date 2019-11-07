@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import classnames from "classnames";
 import axios from 'axios';
+import ReactLoading from 'react-loading';
 
 class Student extends Component {
     constructor(props) {
@@ -9,6 +10,7 @@ class Student extends Component {
             findBy: '',
             val: '',
             data: {},
+            loading: false,
             errors: {},
         }
         this.onChange = this.onChange.bind(this);
@@ -28,9 +30,10 @@ class Student extends Component {
         await this.onFtechDetails();
     }
     async onFtechDetails() {
+        this.setState({ loading: true });
         if (this.state.findBy === 'id') {
             await axios.get(`/api/student/id/${this.state.val}`).then((res) => {
-                this.setState({ data: res });
+                this.setState({ data: res, loading: false });
                 console.log(res);
                 if (!res.data.length) {
                     alert("Not Found");
@@ -41,9 +44,9 @@ class Student extends Component {
         }
         else if (this.state.findBy === 'room') {
             await axios.get(`/api/student/room/${this.state.val}`).then((res) => {
-                this.setState({ data: res });
+                this.setState({ data: res, loading: false });
                 console.log(res);
-                if (!res.data) {
+                if (!res.data.length) {
                     alert("Not Found");
                 }
             }
@@ -64,7 +67,7 @@ class Student extends Component {
                 const data = {
                     data: filteredData
                 }
-                this.setState({ data: data });
+                this.setState({ data: data, loading: false });
                 if (!filteredData.length) {
                     alert("Not Found");
                 }
@@ -73,6 +76,7 @@ class Student extends Component {
                 console.log(err)
             );
         } else {
+            this.setState({ loading: false })
             return alert('Select Room number or Student Id?');
         }
     }
@@ -80,7 +84,7 @@ class Student extends Component {
         this.props.history.push(`/studentdetails/${batch}`);
     }
     render() {
-        const { errors, data } = this.state;
+        const { errors, data, loading } = this.state;
         let tableContent;
         (!data) ? (
             tableContent = null
@@ -112,6 +116,7 @@ class Student extends Component {
                     </td>
                 </tr>
         ) : null
+
         return (
             <div className="mid">
                 <div style={{ display: 'flex', justifyContent: 'space-between' }}>
@@ -184,7 +189,7 @@ class Student extends Component {
                     <button className="btn btn-primary" style={{ fontSize: '12px', width: '200px' }} onClick={this.onFtechDetails}>Find Details</button>
                 </div>
                 <div style={{ marginTop: '50px', overflow: 'scroll', maxHeight: 800 }}>
-                    <table className="table table-striped table-hover">
+                    {!loading ? <table className="table table-striped table-hover">
                         <thead className="thead-dark">
                             <tr>
                                 <th scope="col">#</th>
@@ -201,7 +206,8 @@ class Student extends Component {
                         <tbody>
                             {tableContent}
                         </tbody>
-                    </table>
+                    </table> : <div style={{ display: 'flex', justifyContent: 'center' }}><ReactLoading type="bars" color="#f56f42" /></div>
+                    }
                 </div>
             </div>
         );

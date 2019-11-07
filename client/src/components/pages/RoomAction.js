@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import classnames from "classnames";
 import { createRoomAction, getRoomAction } from '../../actions/roomActions';
 import axios from 'axios';
+import ReactLoading from 'react-loading';
 
 class RoomAction extends Component {
     constructor(props) {
@@ -148,7 +149,7 @@ class RoomAction extends Component {
                         <div className="col">
                             <label htmlFor="exampleFormControlSelect1">Room Occupancy</label>
                             <select className={classnames("form-control", {
-                                "is-invalid": errors.room
+                                "is-invalid": errors.gender
                             })}
                                 id="exampleFormControlSelect1" onChange={this.onChange} value={this.state.gender}
                                 name="gender"
@@ -167,7 +168,7 @@ class RoomAction extends Component {
                 </form>
 
                 <div style={{ marginTop: '50px', overflow: 'scroll', maxHeight: 800 }}>
-                    <table className="table table-striped table-hover">
+                    {!loading ? <table className="table table-striped table-hover">
                         <thead className="thead-dark">
                             <tr>
                                 <th scope="col">#</th>
@@ -182,7 +183,7 @@ class RoomAction extends Component {
                         <tbody>
                             {tableContent}
                         </tbody>
-                    </table>
+                    </table> : <div style={{ display: 'flex', justifyContent: 'center' }}><ReactLoading type="bars" color="#f56f42" /></div>}
                 </div>
             </div>
         );
