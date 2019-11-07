@@ -83,7 +83,7 @@ class RoomAction extends Component {
         ) : null
         const { errors } = this.state;
         return (
-            <div className="mid">
+            <div className="mid container">
                 <h1>{this.state.block}</h1>
                 <br />
                 <form onSubmit={this.onSubmit}>

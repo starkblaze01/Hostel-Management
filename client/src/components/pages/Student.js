@@ -118,7 +118,7 @@ class Student extends Component {
         ) : null
 
         return (
-            <div className="mid">
+            <div className="mid container">
                 <div style={{ display: 'flex', justifyContent: 'space-between' }}>
                     <div className="card" style={{ width: "12rem" }}>
                         <div className="card-body">
