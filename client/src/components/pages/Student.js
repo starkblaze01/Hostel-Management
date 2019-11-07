@@ -32,7 +32,7 @@ class Student extends Component {
             await axios.get(`/api/student/id/${this.state.val}`).then((res) => {
                 this.setState({ data: res });
                 console.log(res);
-                if (!res.data.data) {
+                if (!res.data.length) {
                     alert("Not Found");
                 }
             }).catch(err =>
@@ -65,7 +65,7 @@ class Student extends Component {
                     data: filteredData
                 }
                 this.setState({ data: data });
-                if (!res.data) {
+                if (!filteredData.length) {
                     alert("Not Found");
                 }
             }
