@@ -61,6 +61,9 @@ class Student extends Component {
                     tempVal = false
                 } else if (tempVal === 'present') {
                     tempVal = true
+                } else {
+                    this.setState({ loading: false })
+                    return alert("Input can be 'absent' or 'present' only!");
                 }
                 const filteredData = res.data ? res.data.filter(el => el.isAvailable === tempVal
                 ) : [];
