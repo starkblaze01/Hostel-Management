@@ -26,7 +26,7 @@
   "dependencies": {
     "bcryptjs": "^2.4.3",
     "body-parser": "^1.18.3",
-    "concurrently": "^4.1.0",
+    "concurrently": "^5.2.0",
     "cross-env": "^6.0.3",
     "express": "^4.16.4",
     "gravatar": "^1.8.0",
