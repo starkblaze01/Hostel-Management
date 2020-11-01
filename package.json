@@ -4,8 +4,8 @@
   "description": "Login Portal",
   "main": "server.js",
   "scripts": {
-    "test": "cross-env NODE_ENV=development jest __tests__ --forceExit",
-    "test:watch": "cross-env NODE_ENV=development jest --watchAll",
+    "test": "jest __tests__ --forceExit",
+    "test:watch": "jest --watchAll --forceExit",
     "client-install": "npm install --prefix client",
     "start": "node server.js",
     "server": "nodemon server.js",
@@ -27,7 +27,6 @@
     "bcryptjs": "^2.4.3",
     "body-parser": "^1.18.3",
     "concurrently": "^4.1.0",
-    "cross-env": "^6.0.3",
     "express": "^4.16.4",
     "gravatar": "^1.8.1",
     "jsonwebtoken": "^8.5.1",
