@@ -47,5 +47,8 @@ module.exports = {
 - [Anshuman Verma](https://github.com/anshumanv)
 - ,and [Me](https://github.com/starkblaze01/) 😎
 
+
+Liked the project? Hit the star button to show support!
+
 ## Found an Issue or any suggestions
 Make an issue [here](https://github.com/starkblaze01/Hostel-Management/issues/new).
