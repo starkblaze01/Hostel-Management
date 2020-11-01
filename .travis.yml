@@ -1,1 +1,7 @@
 language: node_js
+node_js: 
+    - "13"
+install:
+    npm install
+script:
+  - npm run test
