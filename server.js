@@ -5,8 +5,6 @@ const passport = require("passport");
 const users = require("./routers/api/users");
 const students = require("./routers/api/student");
 const room = require("./routers/api/room");
-const profile = require("./routers/api/profile");
-const projects = require("./routers/api/projects");
 const staff = require("./routers/api/staff");
 const path = require("path");
 
@@ -21,7 +19,7 @@ const db = require("./config/keys").mongoURI;
 
 // connect to mongoDB
 mongoose
-  .connect(db, { useNewUrlParser: true })
+  .connect(db, { useNewUrlParser: true, useUnifiedTopology: true, useCreateIndex: true  })
   .then(() => console.log("MongoDB Connected"))
   .catch(err => console.log(err));
 
@@ -33,8 +31,6 @@ require("./config/passport")(passport);
 
 // Use Routes
 app.use("/api/users", users);
-app.use("/api/profile", profile);
-app.use("/api/projects", projects);
 app.use("/api/student", students);
 app.use("/api/room", room);
 app.use("/api/staff", staff);
@@ -51,3 +47,5 @@ if (process.env.NODE_ENV === "production") {
 const port = process.env.PORT || 5000;
 
 app.listen(port, () => console.log(`Server running on port ${port}`));
+
+module.exports = { app };
