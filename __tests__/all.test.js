@@ -1,3 +1,4 @@
+const { JsonWebTokenError } = require("jsonwebtoken");
 const request = require("supertest");
 const {app} = require('../server');
 
@@ -6,6 +7,7 @@ const payload = {
     password: 'password',
 };
 
+jest.setTimeout(10000);
 describe('Route /api/users', () => {
     describe('POST /api/users/login', () => {
         test('should return authorization token', done => {
