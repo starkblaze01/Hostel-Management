@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.com/starkblaze01/Hostel-Management.svg?branch=master)](https://travis-ci.com/starkblaze01/Hostel-Management)
+
 # Hostel-Management
 Manage Your Hostel 
 
