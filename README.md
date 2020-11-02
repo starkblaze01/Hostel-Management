@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.com/starkblaze01/Hostel-Management.svg?branch=master)](https://travis-ci.com/starkblaze01/Hostel-Management)
+
 # Hostel-Management
 Manage Your Hostel 
 
@@ -8,14 +10,15 @@ Manage Your Hostel
 - Reactstrap
 - Redux
 - JWT Authentication
+- API testing using Jest
 
 ## Development and Installation
 
 ### Install Backend Dependencies
-- npm install
+- `npm install`
 
 ### Install Frontend Dependencies
-- npm run client-install
+- `npm run client-install`
 
 ### Setup up dev_keys for database
 - Either run local MongoServer or,
@@ -27,7 +30,12 @@ module.exports = {
 }; 
 ```
 ### Run the application
-- npm run dev
+- `npm run dev`
+
+### For testing
+- `npm run test`
+
+**Find API Documentation [here](https://github.com/starkblaze01/Hostel-Management/blob/master/API_Endpoints.md).**
 
 ### Screenshots
 
