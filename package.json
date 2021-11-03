@@ -33,7 +33,7 @@
     "mongoose": "^5.7.5",
     "passport": "^0.4.1",
     "passport-jwt": "^4.0.0",
-    "validator": "^12.1.0"
+    "validator": "^13.7.0"
   },
   "devDependencies": {
     "jest": "^26.6.1",
